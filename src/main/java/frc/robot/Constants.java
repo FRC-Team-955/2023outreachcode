@@ -25,10 +25,14 @@ public class Constants {
             public static int overrrideEnabledButton = 8;
             public static int elevatorUpButton = 4;
             public static int elevatorDownButton = 1;
-            public static int elevatorOverrideAxis = 1;
-            public static int armOverrideAxis = 5;
+            // public static int elevatorOverrideAxis = 1;
+            // public static int armOverrideAxis = 5;
             public static int deployRunIntakeAxis = 2;
             public static int clawDropPieceAxis = 3;
+            public static int forwardRawAxis = 0;
+            public static int strafeRawAxis = 1;
+            public static int rotAxis = 4;
+            public static int driveOverride = 5;
         }
         public static class Key2{
             public static int clawDropPieceButton = 3;

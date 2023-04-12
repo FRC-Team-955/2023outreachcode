@@ -29,13 +29,13 @@ public final class IO {
     //     return joy0.getRawAxis(3);
     // }
 
-    public static double elevatorFineControl(){
-        return -joy1.getRawAxis(Constants.IO.Joy1.elevatorOverrideAxis);
-    }
+    // public static double elevatorFineControl(){
+    //     return -joy1.getRawAxis(Constants.IO.Joy1.elevatorOverrideAxis);
+    // }
 
-    public static double armFineControl(){
-        return joy1.getRawAxis(Constants.IO.Joy1.armOverrideAxis);
-    }
+    // public static double armFineControl(){
+    //     return joy1.getRawAxis(Constants.IO.Joy1.armOverrideAxis);
+    // }
     public static boolean resetAngle(){
         return joy0.getRawButtonPressed(Constants.IO.Joy0.resetAngleButton);
     }
@@ -64,13 +64,13 @@ public final class IO {
         // return joy1.getRawAxis(Constants.IO.Joy1.clawDropPieceAxis)>0.2;
     }
     
-    public static double armOverride() {
-        return joy1.getRawAxis(Constants.IO.Joy1.armOverrideAxis);
-    }
+    // public static double armOverride() {
+    //     return joy1.getRawAxis(Constants.IO.Joy1.armOverrideAxis);
+    // }
       
-    public static double elevatorOverride(){
-        return joy1.getRawAxis(Constants.IO.Joy1.elevatorOverrideAxis);
-    }
+    // public static double elevatorOverride(){
+    //     return joy1.getRawAxis(Constants.IO.Joy1.elevatorOverrideAxis);
+    // }
 
     public static boolean intakeSequenceCone(){
         return key2.getRawButton(Constants.IO.Key2.intakeSequenceConeButton);
@@ -108,8 +108,13 @@ public final class IO {
         }
 
         public static double getSwerveRotation(){
-            //What is axis number reffering too?
-            double rotAxis = joy0.getRawAxis(Constants.IO.Joy0.rotAxis);
+            //What is axis number refering too?
+            double rotAxis;
+            if(joy1.getRawButton(Constants.IO.Joy1.driveOverride)) {
+                rotAxis = joy1.getRawAxis(Constants.IO.Joy1.rotAxis);
+            } else {
+                rotAxis = joy0.getRawAxis(Constants.IO.Joy0.rotAxis);
+            }
 
             // rotAxis = isThrustActive() ? rotAxis : rotAxis*Constants.Drivebase.speed;
 
@@ -136,9 +141,16 @@ public final class IO {
             return new Translation2d(direction.getCos() * magnitude, direction.getSin() * magnitude);
         }
         public static Translation2d getSwerveTranslation(){
-
-            double forwardRawAxis = joy0.getRawAxis(Constants.IO.Joy0.forwardRawAxis);
-            double strafeRawAxis = joy0.getRawAxis(Constants.IO.Joy0.strafeRawAxis);
+            double forwardRawAxis;
+            double strafeRawAxis;
+            if(joy1.getRawButton(Constants.IO.Joy1.driveOverride)) {
+                forwardRawAxis = joy1.getRawAxis(Constants.IO.Joy1.forwardRawAxis);
+                strafeRawAxis = joy1.getRawAxis(Constants.IO.Joy1.strafeRawAxis);
+            } else {
+                forwardRawAxis = joy0.getRawAxis(Constants.IO.Joy0.forwardRawAxis);
+                strafeRawAxis = joy0.getRawAxis(Constants.IO.Joy0.strafeRawAxis);
+            }
+            
 
             Translation2d tAxes = new Translation2d(forwardRawAxis, strafeRawAxis);
 
